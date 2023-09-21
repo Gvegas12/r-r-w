@@ -4,14 +4,14 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   mode: "development",
-  entry: path.resolve(__dirname, "src", "index.js"),
+  entry: path.resolve(__dirname, "src", "main.jsx"),
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].[hash].js",
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: path.resolve(__dirname, "src", "index.html"),
+      template: path.resolve(__dirname, "public", "index.html"),
     }),
     new CleanWebpackPlugin(),
   ],
@@ -29,12 +29,12 @@ module.exports = {
         use: ["file-loader"],
       },
       {
-        test: /\.m?js$/,
+        test: /\.jsx$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env"],
+            presets: ["@babel/preset-env", "@babel/preset-react"],
           },
         },
       },
