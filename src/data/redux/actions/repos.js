@@ -1,12 +1,18 @@
-import { $api } from "../../http";
-import { setRepos } from "../reducers/reposReducer";
+import axios from "axios";
+import { setIsFetching, setRepos } from "../reducers/reposReducer";
 
-export const getRepos = (searchQuery = "stars:%3E1") => {
+const searchQueryDefaultValue = "stars:%3E1";
+
+export const getRepos = (searchQuery = searchQueryDefaultValue) => {
+  if (!searchQuery) {
+    searchQuery = searchQueryDefaultValue;
+  }
+
   return async (dispatch) => {
-    const { data } = await $api.get(
-      `/search/repositories?q=${searchQuery}&sort=stars`
+    dispatch(setIsFetching(true));
+    const { data } = await axios.get(
+      `https://api.github.com/search/repositories?q=${searchQuery}&sort=stars`
     );
-
     dispatch(setRepos(data));
   };
 };
