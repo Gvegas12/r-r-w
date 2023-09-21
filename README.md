@@ -1,4 +1,4 @@
-# An example of a simple application with the React Webpack configuration.
+# An example of a simple application with the React Webpack.
 
 ## Webpack Dev Server:
 
